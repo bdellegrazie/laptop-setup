@@ -1,4 +1,11 @@
 ---
+repositories_apt_key__chrome:
+  - url: https://dl.google.com/linux/linux_signing_key.pub
+    id: '4CCA1EAF950CEE4AB83976DCA040830F7FAC5991'
+
 repositories_apt__chrome:
   - filename: google-chrome
     repo: 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main'
+
+packages_apt__chrome:
+  - 'google-chrome-stable'

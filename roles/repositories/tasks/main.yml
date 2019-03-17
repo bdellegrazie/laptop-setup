@@ -10,6 +10,9 @@
     state: "{{ item.state | default(omit) }}"
     url: "{{ item.url | default(omit) }}"
     validate_certs: "{{ item.validate_certs | default(omit) }}"
+  with_items: "{{ repositories_apt_key }}"
+  when: (ansible_facts['os_family'] | lower) == 'debian'
+
 - name: APT Repositories
   become: true
   apt_repository:
