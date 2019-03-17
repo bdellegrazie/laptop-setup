@@ -1,0 +1,9 @@
+---
+
+packages_apt__pipenv:
+  - python3-dev
+  - python3-pip
+  - python3-venv
+
+packages_pip_user__pipenv:
+  - pipenv

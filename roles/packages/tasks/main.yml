@@ -5,3 +5,12 @@
     name: "{{ packages_apt }}"
     state: present
   when: (ansible_facts['os_family'] | lower) == 'debian'
+
+- name: Install pip user packages
+  become: true
+  become_user: "{{ packages_pip_become_user }}"
+  pip:
+    name: "{{ packages_pip_user }}"
+    executable: "{{ packages_pip_executable | default(omit) }}"
+    extra_args: --user
+    state: present

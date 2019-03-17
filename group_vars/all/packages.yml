@@ -1,2 +1,4 @@
 ---
 packages_apt: "{{ dict(hostvars[inventory_hostname]) | default({}) | key_startswith('packages_apt__') | list | default([]) | flatten(levels=1) | sort | unique }}"
+
+packages_pip_user: "{{ dict(hostvars[inventory_hostname]) | default({}) | key_startswith('packages_pip_user__') | list | default([]) | flatten(levels=1) | sort | unique }}"
