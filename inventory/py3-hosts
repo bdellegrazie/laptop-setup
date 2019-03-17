@@ -1,0 +1,4 @@
+[py3-hosts]
+
+[py3-hosts:vars]
+ansible_python_interpreter=/usr/bin/python3

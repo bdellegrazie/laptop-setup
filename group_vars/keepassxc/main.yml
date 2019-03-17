@@ -1,0 +1,6 @@
+---
+repositories_apt__keepassxc:
+  - repo: ppa:phoerious/keepassxc
+
+packages_apt__keepassxc:
+  - keepassxc

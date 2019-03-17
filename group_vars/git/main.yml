@@ -1,0 +1,12 @@
+---
+
+repositories_apt__git:
+  - repo: 'ppa:git-core/ppa'
+
+packages_apt__git:
+  - git
+  - git-gui
+  - git-merge-changelog
+  - git-review
+  - gitpkg
+  - meld

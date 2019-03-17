@@ -1,0 +1,6 @@
+---
+- name: update apt cache
+  become: true
+  apt:
+    update_cache: true
+  when: (ansible_os_family | lower) == 'debian'

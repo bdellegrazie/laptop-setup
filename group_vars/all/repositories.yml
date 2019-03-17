@@ -1,0 +1,2 @@
+---
+repositories_apt: "{{ dict(hostvars[inventory_hostname]) | default({}) | key_startswith('repositories_apt__') | list | default([]) | flatten(levels=1) | unique }}"

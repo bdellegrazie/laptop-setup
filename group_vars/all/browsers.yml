@@ -1,0 +1,7 @@
+---
+packages_apt__browsers:
+  - chromium-browser
+  - chromium-browser-l10n
+  - chromium-codecs-ffmpeg-extra
+  - firefox
+  - firefox-locale-en

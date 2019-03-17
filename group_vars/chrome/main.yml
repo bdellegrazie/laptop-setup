@@ -1,0 +1,4 @@
+---
+repositories_apt__chrome:
+  - filename: google-chrome
+    repo: 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main'

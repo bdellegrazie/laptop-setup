@@ -1,0 +1,12 @@
+---
+repositories_apt__libreoffice:
+  - repo: ppa:libreoffice/ppa
+
+packages_apt__libreoffice:
+  - libreoffice-calc
+  - libreoffice-draw
+  - libreoffice-gnome
+  - libreoffice-help-en-gb
+  - libreoffice-impress
+  - libreoffice-math
+  - libreoffice-writer

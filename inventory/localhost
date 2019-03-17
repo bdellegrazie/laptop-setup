@@ -1,0 +1,13 @@
+localhost ansible_host=localhost ansible_connection=local
+
+[py3-hosts]
+localhost
+
+[git]
+localhost
+
+[keepassxc]
+localhost
+
+[libreoffice]
+localhost

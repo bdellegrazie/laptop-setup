@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: true
+  gather_facts: true
+  tasks:
+    - debug:
+        var: packages_apt
+
+- hosts: all
+  gather_facts: false
+  roles:
+    - repositories
+    - packages

@@ -1,0 +1,25 @@
+---
+- name: APT Repository Keys
+  become: true
+  apt_key:
+    data: "{{ item.data | default(omit) }}"
+    file: "{{ item.file | default(omit) }}"
+    id: "{{ item.id | default(omit) }}"
+    keyring: "{{ item.keyring | default(omit) }}"
+    keyserver: "{{ item.keyserver | default(omit) }}"
+    state: "{{ item.state | default(omit) }}"
+    url: "{{ item.url | default(omit) }}"
+    validate_certs: "{{ item.validate_certs | default(omit) }}"
+- name: APT Repositories
+  become: true
+  apt_repository:
+    codename: "{{ item.codename | default(omit) }}"
+    filename: "{{ item.filename | default(omit) }}"
+    mode: "{{ item.mode | default(omit) }}"
+    repo: "{{ item.repo }}"
+    state: "{{ item.state | default(omit) }}"
+    update_cache: false
+  with_items: "{{ repositories_apt }}"
+  when: (ansible_facts['os_family'] | lower) == 'debian'
+  notify:
+    - update apt cache
