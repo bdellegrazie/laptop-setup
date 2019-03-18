@@ -1,0 +1,8 @@
+---
+- name: Install nvm
+  become: true
+  become_user: "{{ nvm_become_user }}"
+  git:
+    dest: "{{ nvm_become_user_home ~ '/.nvm' }}"
+    repo: https://github.com/creationix/nvm.git
+    version: "{{ nvm_version }}"

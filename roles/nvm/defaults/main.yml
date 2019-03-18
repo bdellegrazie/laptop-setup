@@ -1,0 +1,4 @@
+---
+nvm_become_user: "{{ lookup('env','USER') }}"
+nvm_become_user_home: "{{ lookup('env','HOME') }}"
+nvm_version: "v0.34.0"
