@@ -1,0 +1,10 @@
+---
+- name: Add user to libvirt group
+  become: true
+  user:
+    append: true
+    create_home: false
+    groups:
+      - libvirt
+    name: "{{ kvm_user }}"
+    state: present

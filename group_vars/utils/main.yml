@@ -1,5 +1,6 @@
 ---
 packages_apt__utils:
+  - curl
   - stow
   - tmux
   - quilt

@@ -12,6 +12,9 @@ localhost
 [keepassxc]
 localhost
 
+[kvm]
+localhost
+
 [libreoffice]
 localhost
 

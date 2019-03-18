@@ -1,0 +1,7 @@
+---
+packages_apt__kvm:
+  - libvirt-bin
+  - qemu-kvm
+  - virtinst
+  - virt-manager
+  - virt-viewer
