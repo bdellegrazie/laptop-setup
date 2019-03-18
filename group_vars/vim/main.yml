@@ -5,3 +5,4 @@ packages_apt__vim:
   - vim-gtk3
   - vim-addon-manager
   - vim-editorconfig
+  - vim-syntax-docker
