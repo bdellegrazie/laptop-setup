@@ -1,2 +1,3 @@
 ---
 powerline_become_user: "{{ lookup('env','USER') }}"
+powerline_become_user_home: "{{ lookup('env','HOME') }}"

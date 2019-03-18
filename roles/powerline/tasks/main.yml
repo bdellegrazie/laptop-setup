@@ -1,20 +1,10 @@
 ---
-- name: Get Powerline User Info
-  become: true
-  getent:
-    database: passwd
-    key: "{{ powerline_become_user }}"
-
-- name: Powerline user home dir
-  set_fact:
-    _powerline_become_user_home: "{{ getent_passwd[powerline_become_user][4] }}"
-
 - name: Add powerline to vim
   become: true
   become_user: "{{ powerline_become_user }}"
   command: /usr/bin/vim-addons install powerline
   args:
-    creates: "{{ _powerline_become_user_home ~ '/.vim/plugin/powerline.vim' }}"
+    creates: "{{ powerline_become_user_home ~ '/.vim/plugin/powerline.vim' }}"
 
 - name: Enable and Start Powerline Daemon
   become: true

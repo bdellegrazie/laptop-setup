@@ -5,8 +5,16 @@
 
 - hosts: all
   gather_facts: false
+  vars:
+    target_user: "{{ lookup('env','USER') }}"
+    target_user_home: "{{ lookup('env','HOME') }}"
   roles:
     - repositories
-    - packages
-    - kvm
-    - powerline
+    - role: packages
+      packages_pip_become_user: "{{ target_user }}"
+      packages_pip_become_user_home: "{{ target_user_home }}"
+    - role: kvm
+      kvm_user: "{{ target_user }}"
+    - role: powerline
+      powerline_become_user: "{{ target_user }}"
+      powerline_become_user_home: "{{ target_user_home }}"
