@@ -17,3 +17,12 @@ localhost
 
 [pipenv]
 localhost
+
+[powerline]
+localhost
+
+[vim]
+localhost
+
+[utils]
+localhost

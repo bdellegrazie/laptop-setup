@@ -1,0 +1,7 @@
+---
+
+packages_apt__vim:
+  - vim-nox
+  - vim-gtk3
+  - vim-addon-manager
+  - vim-editorconfig

@@ -1,4 +1,4 @@
 packages_apt: []
-packages_pip_become_user: "{{ ansible_user }}"
+packages_pip_become_user: "{{ lookup('env','USER') }}"
 packages_pip_user: []
-packages_pip_executable: "{{ ansible_facts['ansible_user_home'] ~ '/.local/bin/pip3' }}"
+packages_pip_executable: "{{ lookup('env','HOME') ~ '/.local/bin/pip3' }}"
