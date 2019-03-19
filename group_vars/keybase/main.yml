@@ -1,0 +1,11 @@
+---
+repositories_apt_key__keybase:
+  - url: https://keybase.io/docs/server_security/code_signing_key.asc
+    id: '222B85B0F90BE2D24CFEB93F47484E50656D16C7'
+
+repositories_apt__keybase:
+  - filename: keybase
+    repo: 'deb http://prerelease.keybase.io/deb stable main'
+
+packages_apt__keybase:
+  - 'keybase'

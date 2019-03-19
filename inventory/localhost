@@ -12,6 +12,9 @@ localhost
 [keepassxc]
 localhost
 
+[keybase]
+localhost
+
 [kvm]
 localhost
 
