@@ -4,5 +4,5 @@
   become_user: "{{ nvm_become_user }}"
   git:
     dest: "{{ nvm_become_user_home ~ '/.nvm' }}"
-    repo: https://github.com/creationix/nvm.git
+    repo: "{{ nvm_url }}"
     version: "{{ nvm_version }}"

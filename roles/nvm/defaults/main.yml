@@ -1,4 +1,5 @@
 ---
 nvm_become_user: "{{ lookup('env','USER') }}"
 nvm_become_user_home: "{{ lookup('env','HOME') }}"
+nvm_url: "https://github.com/creationix/nvm.git"
 nvm_version: "v0.34.0"
