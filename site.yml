@@ -18,6 +18,9 @@
     - role: nvm
       nvm_become_user: "{{ target_user }}"
       nvm_become_user_home: "{{ target_user_home }}"
+    - role: pyenv
+      pyenv_become_user: "{{ target_user }}"
+      pyenv_become_user_home: "{{ target_user_home }}"
     - role: powerline
       powerline_become_user: "{{ target_user }}"
       powerline_become_user_home: "{{ target_user_home }}"
