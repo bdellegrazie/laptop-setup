@@ -1,0 +1,16 @@
+---
+- name: Set facts
+  set_fact:
+    _atom_target: "{{ atom_cache ~ '/' ~ 'atom-' ~ atom_version.lstrip('v') ~ '_amd64.deb' }}"
+
+- name: Get Package
+  get_url:
+    url: "{{ atom_url }}"
+    dest: "{{ _atom_target }}"
+    checksum: "{{ atom_checksum }}"
+    mode: "u=rw,g=r,o="
+
+- name: Install
+  become: true
+  apt:
+    deb: "{{ _atom_target }}"
