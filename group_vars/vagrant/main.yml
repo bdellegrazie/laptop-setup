@@ -1,0 +1,13 @@
+---
+packages_apt__vagrant:
+  - build-essential
+  - dnsmasq-base
+  - ebtables
+  - libvirt-bin
+  - libvirt-dev
+  - libxslt-dev
+  - libxml2-dev
+  - qemu
+  - ruby-dev
+  - ruby-libvirt
+  - zlib1g-dev

@@ -1,0 +1,24 @@
+---
+- name: Set facts
+  set_fact:
+    _vagrant_target: "{{ vagrant_cache ~ '/' ~ 'vagrant_' ~ vagrant_version ~ '_x86_64.deb' }}"
+
+- name: Get Package
+  get_url:
+    url: "{{ vagrant_url }}"
+    dest: "{{ _vagrant_target }}"
+    checksum: "{{ vagrant_checksum }}"
+    mode: "u=rw,g=r,o="
+
+- name: Install
+  become: true
+  apt:
+    deb: "{{ _vagrant_target }}"
+
+- name: Install Plugins
+  become: true
+  become_user: "{{ vagrant_become_user }}"
+  command: /usr/bin/vagrant plugin install {{ item }}
+  with_items: "{{ vagrant_plugins }}"
+  tags:
+    - skip_ansible_lint

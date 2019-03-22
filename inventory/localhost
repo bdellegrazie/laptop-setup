@@ -30,6 +30,9 @@ localhost
 [pyenv]
 localhost
 
+[vagrant]
+localhost
+
 [vim]
 localhost
 

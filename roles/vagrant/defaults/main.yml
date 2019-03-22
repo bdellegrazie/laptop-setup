@@ -1,0 +1,9 @@
+---
+vagrant_become_user: "{{ lookup('env','USER') }}"
+vagrant_become_user_home: "{{ lookup('env','HOME') }}"
+vagrant_version: "2.2.4"
+vagrant_checksum: "sha1:e96a0f3e1aa6745ca3becb825c513eadcfbbbd4f"
+vagrant_url: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.deb"
+vagrant_cache: "{{ lookup('env','HOME') ~ '/Downloads' }}"
+vagrant_plugins:
+  - vagrant-libvirt
