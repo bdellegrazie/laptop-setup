@@ -1,0 +1,39 @@
+---
+- name: Docker configuration
+  become: true
+  copy:
+    dest: /etc/docker/daemon.json
+    content: "{{ docker_daemon_config | to_nice_json(indent=2) }}"
+    owner: root
+    group: root
+    mode: "u=rw,g=r,o="
+  notify:
+    - restart Docker
+
+- name: Docker Service Override Dir
+  become: true
+  file:
+    dest: /etc/systemd/system/docker.service.d
+    owner: root
+    group: root
+    state: directory
+    mode: "u=rwx,go=rx"
+
+- name: Docker Service Override
+  become: true
+  template:
+    dest: /etc/systemd/system/docker.service.d/listeners.conf
+    src: docker.service.j2
+    owner: root
+    group: root
+    mode: "u=rw,go=r"
+  notify:
+    - restart Docker
+
+- name: Docker Service
+  become: true
+  systemd:
+    name: docker.service
+    daemon_reload: true
+    enabled: "{{ docker_service_enable | bool }}"
+    state: "{{ docker_service_state }}"

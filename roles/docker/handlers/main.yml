@@ -1,0 +1,6 @@
+---
+- name: restart Docker
+  become: true
+  systemd:
+    name: docker
+    state: "{{ ( docker_service_state != 'stopped' ) | ternary('restarted','stopped') }}"

@@ -6,6 +6,9 @@ localhost
 [chrome]
 localhost
 
+[docker]
+localhost
+
 [git]
 localhost
 

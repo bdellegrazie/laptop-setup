@@ -1,0 +1,8 @@
+---
+docker_daemon_config:
+  "storage-driver": overlay2
+docker_daemon_listeners:
+  - fd://
+  - tcp://127.0.0.1:2375
+docker_service_enable: true
+docker_service_state: started

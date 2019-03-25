@@ -16,6 +16,7 @@
     - role: kvm
       kvm_user: "{{ target_user }}"
     - role: atom
+    - role: docker
     - role: nvm
       nvm_become_user: "{{ target_user }}"
       nvm_become_user_home: "{{ target_user_home }}"
