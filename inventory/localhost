@@ -42,5 +42,8 @@ localhost
 [vim]
 localhost
 
+[virtualbox]
+localhost
+
 [utils]
 localhost

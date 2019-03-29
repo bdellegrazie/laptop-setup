@@ -1,0 +1,11 @@
+---
+repositories_apt_key__virtualbox:
+  - url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
+    id: 'B9F8D658297AF3EFC18D5CDFA2F683C52980AECF'
+
+repositories_apt__virtualbox:
+  - filename: virtualbox
+    repo: "deb https://download.virtualbox.org/virtualbox/debian {{ ansible_facts['distribution_release'] }} contrib"
+
+packages_apt__virtualbox:
+  - 'virtualbox-6.0'

@@ -1,0 +1,17 @@
+---
+- name: Set facts
+  set_fact:
+    _virtualbox_extension_target: "{{ virtualbox_cache ~ '/' ~ virtualbox_extension_file }}"
+
+- name: Get Extension Pack
+  get_url:
+    url: "{{ virtualbox_extension_url }}"
+    dest: "{{ _virtualbox_extension_target }}"
+    checksum: "{{ virtualbox_extension_checksum }}"
+    mode: "u=rw,g=r,o="
+
+- name: Install Extension Pack
+  become: true
+  command: "/usr/bin/VBoxManage extpack install --replace {{ _virtualbox_extension_target }} --accept-license={{ virtualbox_extension_license }}"
+  args:
+    creates: "/usr/lib/virtualbox/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack/ExtPack.xml"
