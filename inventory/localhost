@@ -24,6 +24,9 @@ localhost
 [libreoffice]
 localhost
 
+[pidgin]
+localhost
+
 [pipenv]
 localhost
 

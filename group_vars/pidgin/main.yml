@@ -1,0 +1,13 @@
+---
+
+repositories_apt__pidgin:
+  - repo: 'ppa:sipe-collab/ppa'
+
+packages_apt__pidgin:
+  - pidgin
+  - pidgin-awayonlock
+  - pidgin-encryption
+  - pidgin-gnome-keyring
+  - pidgin-otr
+  - pidgin-sipe
+  - pidgin-skype
