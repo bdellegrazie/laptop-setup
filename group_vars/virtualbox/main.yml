@@ -5,7 +5,7 @@ repositories_apt_key__virtualbox:
 
 repositories_apt__virtualbox:
   - filename: virtualbox
-    repo: "deb https://download.virtualbox.org/virtualbox/debian {{ ansible_facts['distribution_release'] }} contrib"
+    repo: "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian {{ ansible_facts['distribution_release'] }} contrib"
 
 packages_apt__virtualbox:
   - 'virtualbox-6.0'
