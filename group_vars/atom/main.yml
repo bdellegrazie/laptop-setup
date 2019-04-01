@@ -1,0 +1,11 @@
+---
+repositories_apt_key__atom:
+  - url: https://packagecloud.io/AtomEditor/atom/gpgkey
+    id: '0A0FAB860D48560332EFB581B75442BBDE9E3B09'
+
+repositories_apt__atom:
+  - filename: atom
+    repo: 'deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main'
+
+packages_apt__atom:
+  - 'atom'

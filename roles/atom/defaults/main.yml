@@ -1,5 +1,0 @@
----
-atom_version: "v1.35.1"
-atom_checksum: "sha1:ae694fa77f138d887f9bcec67cdd6de10af97391"
-atom_url: "https://github.com/atom/atom/releases/download/{{ atom_version }}/atom-amd64.deb"
-atom_cache: "{{ lookup('env','HOME') ~ '/Downloads' }}"
