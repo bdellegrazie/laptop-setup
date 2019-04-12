@@ -28,6 +28,6 @@
     - role: vagrant
       vagrant_become_user: "{{ target_user }}"
       vagrant_become_user_home: "{{ target_user_home }}"
-    - role: virtualbox
-      virtualbox_become_user: "{{ target_user }}"
-      virtualbox_become_user_home: "{{ target_user_home }}"
+    #- role: virtualbox
+    #  virtualbox_become_user: "{{ target_user }}"
+    #  virtualbox_become_user_home: "{{ target_user_home }}"
