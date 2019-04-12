@@ -1,4 +1,21 @@
 ---
+- name: Install pre-packages
+  become: true
+  apt:
+    name: "{{ packages_apt_pre }}"
+    state: present
+  when: (ansible_facts['os_family'] | lower) == 'debian'
+
+- name: Pre-configure Packages
+  become: true
+  debconf:
+    name: "{{ item.name }}"
+    question: "{{ item.question | default(omit) }}"
+    value: "{{ item.value | default(omit) }}"
+    vtype: "{{ item.vtype | default(omit) }}"
+  when: (ansible_facts['os_family'] | lower) == 'debian'
+  loop: "{{ packages_apt_debconf }}"
+
 - name: Install packages
   become: true
   apt:

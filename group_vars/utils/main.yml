@@ -1,6 +1,14 @@
 ---
+packages_apt_debconf__utils:
+  - name: ttf-mscorefonts-installer
+    question: msttcorefonts/accepted-mscorefonts-eula
+    value: 'true'
+    vtype: boolean
+
 packages_apt__utils:
   - curl
+  - quilt
   - stow
   - tmux
-  - quilt
+  - ttf-mscorefonts-installer
+  - wget

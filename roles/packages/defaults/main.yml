@@ -1,3 +1,6 @@
+packages_apt_pre:
+  - debconf
+  - debconf-utils
 packages_apt: []
 packages_pip_become_user: "{{ lookup('env','USER') }}"
 packages_pip_become_user_home: "{{ lookup('env','HOME') }}"
