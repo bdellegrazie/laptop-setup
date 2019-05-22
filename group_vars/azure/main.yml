@@ -1,0 +1,11 @@
+---
+repositories_apt_key__azure_cli:
+  - url: https://packages.microsoft.com/keys/microsoft.asc
+    id: 'BC528686B50D79E339D3721CEB3E94ADBE1229CF'
+
+repositories_apt__azure_cli:
+  - filename: azure-cli
+    repo: 'deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ ansible_lsb["codename"] | lower }} main'
+
+packages_apt__azure_cli:
+  - 'azure-cli'

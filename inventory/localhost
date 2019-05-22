@@ -1,9 +1,12 @@
 localhost ansible_host=localhost ansible_connection=local
 
-[py3-hosts]
+[py3_hosts]
 localhost
 
 [atom]
+localhost
+
+[azure]
 localhost
 
 [chrome]

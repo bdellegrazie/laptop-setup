@@ -1,4 +1,4 @@
-[py3-hosts]
+[py3_hosts]
 
-[py3-hosts:vars]
+[py3_hosts:vars]
 ansible_python_interpreter=/usr/bin/python3
