@@ -57,5 +57,8 @@ localhost
 [virtualbox]
 #localhost
 
+[vscode]
+localhost
+
 [utils]
 localhost
