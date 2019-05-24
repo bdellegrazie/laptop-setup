@@ -1,0 +1,13 @@
+---
+# Based on contents of https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
+repositories_apt_key__dotnet:
+  - url: https://packages.microsoft.com/keys/microsoft.asc
+    id: 'BC528686B50D79E339D3721CEB3E94ADBE1229CF'
+    keyring: /etc/apt/trusted.gpg.d/microsoft-prod.gpg
+
+repositories_apt__dotnet:
+  - filename: microsoft-prod
+    repo: 'deb [arch=amd64] https://packages.microsoft.com/{{ ansible_lsb["id"] | lower }}/{{ ansible_lsb["release"] | lower }}/prod {{ ansible_lsb["codename"] | lower }} main'
+
+packages_apt__dotnet:
+  - 'dotnet-sdk-2.2'

@@ -15,6 +15,9 @@ localhost
 [docker]
 localhost
 
+[dotnet]
+localhost
+
 [git]
 localhost
 
