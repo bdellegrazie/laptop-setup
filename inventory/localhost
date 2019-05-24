@@ -39,6 +39,9 @@ localhost
 [powerline]
 localhost
 
+[powershell]
+localhost
+
 [pyenv]
 localhost
 
