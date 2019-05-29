@@ -33,6 +33,9 @@ localhost
 [libreoffice]
 localhost
 
+[mono]
+localhost
+
 [pidgin]
 localhost
 
