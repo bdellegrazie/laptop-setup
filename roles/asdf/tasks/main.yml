@@ -1,0 +1,56 @@
+---
+- name: Install ASDF
+  become: true
+  become_user: "{{ asdf_become_user }}"
+  git:
+    dest: "{{ asdf_become_user_home ~ '/.asdf' }}"
+    repo: "{{ asdf_repo }}"
+    version: "{{ asdf_version }}"
+
+- name: Install plugins
+  become: true
+  become_user: "{{ asdf_become_user }}"
+  command: "asdf plugin-add {{ item }}"
+  args:
+    creates: "{{ asdf_become_user_home ~ '/.asdf/plugins/' ~ item ~ '/' }}"
+  loop: "{{ asdf_plugins | map(attribute='name') | list }}"
+
+- name: Install tool versions
+  become: true
+  become_user: "{{ asdf_become_user }}"
+  command: "asdf install {{ item.0.name }} {{ item.1 }}"
+  args:
+    creates: "{{ asdf_become_user_home ~ '/.asdf/installs/' ~ item.0.name ~ '/' ~ item.1 ~ '/' }}"
+  loop: "{{ asdf_plugins | subelements('versions', skip_missing=True ) }}"
+  loop_control:
+    label: "{{ item.0.name ~ ' - ' ~ item.1 }}"
+
+- name: Get current global versions
+  become: true
+  become_user: "{{ asdf_become_user }}"
+  read_csv:
+    delimiter: ' '
+    dialect: unix
+    fieldnames:
+      - name
+      - version
+    key: name
+    path: "{{ asdf_become_user_home ~ '/.tool-versions' }}"
+  register: _r_tool_versions
+  ignore_errors: true
+
+- name: Asdf facts
+  set_fact:
+    _asdf_tool_versions: "{{ _r_tool_versions['dict'] | default({}) }}"
+
+- name: Set global versions
+  become: true
+  become_user: "{{ asdf_become_user }}"
+  command: "asdf global {{ item.name }} {{ item.global }}"
+  when: |
+    (item.name not in _asdf_tool_versions) or
+    (item.name in _asdf_tool_versions and
+    (item.global is version_compare(_asdf_tool_versions[item.name]['version'] or default('0.0.0'), '>')))
+  loop: "{{ asdf_plugins | selectattr('global', 'defined') | list }}"
+  loop_control:
+    label: "{{ item.name ~ ' - ' ~ item.global }}"

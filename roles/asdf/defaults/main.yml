@@ -1,0 +1,11 @@
+---
+asdf_become_user: "{{ lookup('env','USER') }}"
+asdf_become_user_home: "{{ lookup('env','HOME') }}"
+asdf_repo: https://github.com/asdf-vm/asdf.git
+asdf_version: 'HEAD'
+asdf_plugins: []
+#  - name: abc
+#    versions:
+#      - '1.0'
+#      - '1.1'
+#    global: '1.0'

@@ -3,6 +3,9 @@ localhost ansible_host=localhost ansible_connection=local
 [py3_hosts]
 localhost
 
+[asdf]
+localhost
+
 [atom]
 localhost
 
