@@ -35,3 +35,11 @@
     #- role: virtualbox
     #  virtualbox_become_user: "{{ target_user }}"
     #  virtualbox_become_user_home: "{{ target_user_home }}"
+
+- hosts: azure
+  gather_facts: false
+  vars:
+    target_user: "{{ lookup('env','USER') }}"
+  roles:
+    - role: az-cli-extensions
+      az_cli_extensions_user: "{{ target_user }}"

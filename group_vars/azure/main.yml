@@ -10,3 +10,7 @@ repositories_apt__azure_cli:
 
 packages_apt__azure_cli:
   - 'azure-cli'
+
+az_cli_extensions:
+  - 'azure-devops'
+  - 'aks-preview'
