@@ -9,6 +9,9 @@ localhost
 [atom]
 localhost
 
+[aws]
+localhost
+
 [azure]
 localhost
 

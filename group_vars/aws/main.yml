@@ -1,0 +1,4 @@
+---
+packages_pip_user__aws:
+  - awscli
+  - aws-shell
