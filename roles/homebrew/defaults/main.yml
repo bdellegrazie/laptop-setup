@@ -1,0 +1,13 @@
+---
+# https://docs.brew.sh/Homebrew-on-Linux
+homebrew_become_user: "{{ lookup('env','USER') }}"
+homebrew_become_user_home: "{{ lookup('env','HOME') }}"
+homebrew_repo: "https://github.com/Homebrew/brew"
+homebrew_version: 'HEAD'
+# Install path needed to make use of binary packages
+homebrew_install_path: "/home/linuxbrew/.linuxbrew"
+homebrew_bin_path: "{{ homebrew_install_path ~ '/bin' }}"
+homebrew_repo_path: "{{ homebrew_install_path ~ '/Homebrew' }}"
+homebrew_bin_brew: "{{ homebrew_bin_path ~ '/brew' }}"
+homebrew_taps: []
+homebrew_formulae: []

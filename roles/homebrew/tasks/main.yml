@@ -1,0 +1,52 @@
+---
+# As per https://docs.brew.sh/Homebrew-on-Linux#alternative-installation
+- name: Homebrew Directory
+  become: true
+  become_user: root
+  file:
+    path: "{{ homebrew_bin_path }}"
+    owner: "{{ homebrew_become_user }}"
+    group: "{{ homebrew_become_user }}"
+    mode: "u=rwx,g=rwx,o=rx"
+    state: directory
+
+- name: Install homebrew
+  become: true
+  become_user: "{{ homebrew_become_user }}"
+  git:
+    dest: "{{ homebrew_repo_path }}"
+    repo: "{{ homebrew_repo }}"
+    version: "{{ homebrew_version }}"
+
+- name: Homebrew binary symlink
+  become: true
+  become_user: "{{ homebrew_become_user }}"
+  file:
+    path: "{{ homebrew_bin_brew }}"
+    src: "{{ homebrew_repo_path ~ '/bin/brew' }}"
+    state: link
+
+- name: Homebrew Taps (current)
+  become: true
+  become_user: "{{ homebrew_become_user }}"
+  command: "{{ homebrew_bin_brew ~ ' tap' }}"
+  changed_when: false
+  check_mode: false
+  register: _homebrew_taps
+
+- name: Homebrew Taps
+  become: true
+  become_user: "{{ homebrew_become_user }}"
+  command: "{{ homebrew_bin_brew ~ ' tap ' ~ item }}"
+  when:
+    - _homebrew_taps is succeeded
+    - item not in _homebrew_taps.stdout_lines
+  loop: "{{ homebrew_taps }}"
+
+- name: Homebrew Formulae
+  become: true
+  become_user: "{{ homebrew_become_user }}"
+  homebrew:
+    name: "{{ homebrew_formulae }}"
+    path: "{{ homebrew_bin_path }}"
+    state: present

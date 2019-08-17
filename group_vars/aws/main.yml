@@ -2,3 +2,9 @@
 packages_pip_user__aws:
   - awscli
   - aws-shell
+
+homebrew_taps__aws:
+  - aws/tap
+
+homebrew_formulae__aws:
+  - aws-sam-cli

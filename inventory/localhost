@@ -27,6 +27,9 @@ localhost
 [git]
 localhost
 
+[homebrew]
+localhost
+
 [keepassxc]
 localhost
 

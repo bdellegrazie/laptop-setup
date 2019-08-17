@@ -1,0 +1,6 @@
+---
+packages_apt__homebrew:
+  - build-essential
+  - curl
+  - file
+  - git
