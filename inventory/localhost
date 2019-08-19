@@ -30,8 +30,8 @@ localhost
 [git]
 localhost
 
-[homebrew]
-localhost
+#[homebrew]
+#localhost
 
 [keepassxc]
 localhost
