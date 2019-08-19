@@ -15,6 +15,9 @@ localhost
 [azure]
 localhost
 
+[bazel]
+localhost
+
 [chrome]
 localhost
 

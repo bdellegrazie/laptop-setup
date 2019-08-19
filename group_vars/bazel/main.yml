@@ -1,0 +1,12 @@
+---
+repositories_apt_key__bazel:
+  - url: https://bazel.build/bazel-release.pub.gpg
+    id: '71A1D0EFCFEB6281FD0437C93D5919B448457EE0'
+
+repositories_apt__bazel:
+  - filename: bazel
+    repo: "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8"
+
+packages_apt__bazel:
+  - 'openjdk-11-jdk'
+  - 'bazel'
