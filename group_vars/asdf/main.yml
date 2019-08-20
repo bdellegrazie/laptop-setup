@@ -4,6 +4,10 @@ packages_apt__asdf:
 
 asdf_version: 'v0.7.4'
 asdf_plugins:
+  - name: eksctl
+    versions:
+      - '0.4.0'
+    global: '0.4.0'
   - name: elixir
     versions:
       - '1.9.1-otp-22'
