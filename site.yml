@@ -20,6 +20,9 @@
     - role: kvm
       kvm_user: "{{ target_user }}"
     - role: docker
+    - role: asdf
+      asdf_become_user: "{{ target_user }}"
+      asdf_become_user_home: "{{ target_user_home }}"
     - role: nvm
       nvm_become_user: "{{ target_user }}"
       nvm_become_user_home: "{{ target_user_home }}"
@@ -44,16 +47,6 @@
   roles:
     - role: az-cli-extensions
       az_cli_extensions_user: "{{ target_user }}"
-
-- hosts: asdf
-  gather_facts: false
-  vars:
-    target_user: "{{ lookup('env','USER') }}"
-    target_user_home: "{{ lookup('env','HOME') }}"
-  roles:
-    - role: asdf
-      asdf_become_user: "{{ target_user }}"
-      asdf_become_user_home: "{{ target_user_home }}"
 
 - hosts: homebrew
   gather_facts: false
