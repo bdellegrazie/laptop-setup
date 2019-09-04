@@ -2,4 +2,4 @@
 pyenv_become_user: "{{ lookup('env','USER') }}"
 pyenv_become_user_home: "{{ lookup('env','HOME') }}"
 pyenv_url: "https://github.com/pyenv/pyenv.git"
-pyenv_version: "v1.2.9"
+pyenv_version: "v1.2.13"

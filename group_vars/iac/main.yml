@@ -5,8 +5,8 @@ packages_apt__iac:
 asdf_plugins__iac:
   - name: packer
     versions:
-      - '1.4.2'
-    global: '1.4.2'
+      - '1.4.3'
+    global: '1.4.3'
   - name: terraform
     versions:
       - '0.12.7'

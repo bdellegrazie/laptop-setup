@@ -1,11 +1,12 @@
 ---
-packages_pip_user__aws:
-  - awscli
-  - aws-shell
-  - aws-sam-cli
+# Put these in a custom python-env instead to avoid dependency issues
+#packages_pip_user__aws:
+#  - awscli
+#  - aws-shell
+#  - aws-sam-cli
 
 asdf_plugins__aws:
   - name: eksctl
     versions:
-      - '0.4.0'
-    global: '0.4.0'
+      - '0.4.3'
+    global: '0.4.3'
