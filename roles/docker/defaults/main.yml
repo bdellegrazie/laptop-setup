@@ -1,5 +1,8 @@
 ---
+# Insecure registry is for minikube
 docker_daemon_config:
+  "insecure-registries":
+    - "192.168.39.0/24"
   "storage-driver": overlay2
 docker_daemon_listeners:
   - fd://
