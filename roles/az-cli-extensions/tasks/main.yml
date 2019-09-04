@@ -6,6 +6,7 @@
   become_user: "{{ az_cli_extensions_become_user }}"
   command: az extension list-available --output json
   changed_when: false
+  check_mode: false
   register: _extension_list_all_raw
 
 - name: extension facts from JSON via CLI
