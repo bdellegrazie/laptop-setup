@@ -21,11 +21,6 @@
     }}"
   loop: "{{ _extension_list_all }}"
 
-- debug:
-    var: az_cli_extensions
-- debug:
-    var: _extension_list_install
-
 - name: install extensions
   become: true
   become_user: "{{ az_cli_extensions_become_user }}"
