@@ -36,8 +36,8 @@ localhost
 [go]
 localhost
 
-#[homebrew]
-#localhost
+[homebrew]
+localhost
 
 [iac]
 localhost
