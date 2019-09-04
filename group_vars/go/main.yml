@@ -1,0 +1,9 @@
+---
+packages_apt__go:
+  - vim-gocomplete
+
+asdf_plugins__go:
+  - name: golang
+    versions:
+      - '1.13'
+    global: '1.13'

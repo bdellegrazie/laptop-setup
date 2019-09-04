@@ -27,16 +27,28 @@ localhost
 [dotnet]
 localhost
 
+[elixir]
+localhost
+
 [git]
+localhost
+
+[go]
 localhost
 
 #[homebrew]
 #localhost
 
+[iac]
+localhost
+
 [keepassxc]
 localhost
 
 [keybase]
+localhost
+
+[kubernetes]
 localhost
 
 [kvm]

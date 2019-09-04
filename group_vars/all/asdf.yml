@@ -1,0 +1,2 @@
+---
+asdf_plugins: "{{ dict(hostvars[inventory_hostname]) | default({}) | key_startswith('asdf_plugins__') | list | default([]) | flatten(levels=1) | sort | unique }}"

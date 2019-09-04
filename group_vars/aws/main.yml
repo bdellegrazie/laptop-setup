@@ -3,3 +3,9 @@ packages_pip_user__aws:
   - awscli
   - aws-shell
   - aws-sam-cli
+
+asdf_plugins__aws:
+  - name: eksctl
+    versions:
+      - '0.4.0'
+    global: '0.4.0'
