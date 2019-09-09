@@ -1,9 +1,13 @@
 ---
+- name: Local facts
+  set_fact:
+    _asdf_root: "{{ asdf_become_user_home ~ '/.asdf' }}"
+
 - name: Install ASDF
   become: true
   become_user: "{{ asdf_become_user }}"
   git:
-    dest: "{{ asdf_become_user_home ~ '/.asdf' }}"
+    dest: "{{ _asdf_root }}"
     repo: "{{ asdf_repo }}"
     version: "{{ asdf_version }}"
 
@@ -12,7 +16,9 @@
   become_user: "{{ asdf_become_user }}"
   command: "asdf plugin-add {{ item }}"
   args:
-    creates: "{{ asdf_become_user_home ~ '/.asdf/plugins/' ~ item ~ '/' }}"
+    creates: "{{ _asdf_root ~ '/plugins/' ~ item ~ '/' }}"
+  environment:
+    PATH: "{{ _asdf_root ~ '/bin:' ~ ansible_env.PATH }}"
   loop: "{{ asdf_plugins | map(attribute='name') | list }}"
 
 - name: Install tool versions
@@ -20,7 +26,9 @@
   become_user: "{{ asdf_become_user }}"
   command: "asdf install {{ item.0.name }} {{ item.1 }}"
   args:
-    creates: "{{ asdf_become_user_home ~ '/.asdf/installs/' ~ item.0.name ~ '/' ~ item.1 ~ '/' }}"
+    creates: "{{ _asdf_root ~ '/installs/' ~ item.0.name ~ '/' ~ item.1 ~ '/' }}"
+  environment:
+    PATH: "{{ _asdf_root ~ '/bin:' ~ ansible_env.PATH }}"
   loop: "{{ asdf_plugins | subelements('versions', skip_missing=True ) }}"
   loop_control:
     label: "{{ item.0.name ~ ' - ' ~ item.1 }}"
@@ -47,6 +55,8 @@
   become: true
   become_user: "{{ asdf_become_user }}"
   command: "asdf global {{ item.name }} {{ item.global }}"
+  environment:
+    PATH: "{{ _asdf_root ~ '/bin:' ~ ansible_env.PATH }}"
   when: |
     (item.name not in _asdf_tool_versions) or
     (item.name in _asdf_tool_versions and
