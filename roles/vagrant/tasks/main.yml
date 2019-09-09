@@ -15,10 +15,22 @@
   apt:
     deb: "{{ _vagrant_target }}"
 
+- name: List Plugins
+  become: true
+  become_user: "{{ vagrant_become_user }}"
+  command: /usr/bin/vagrant plugin list
+  check_mode: no
+  changed_when: false
+  register: _vagrant_plugins_current
+
 - name: Install Plugins
   become: true
   become_user: "{{ vagrant_become_user }}"
   command: /usr/bin/vagrant plugin install {{ item }}
-  with_items: "{{ vagrant_plugins }}"
+  when:
+    - _vagrant_plugins_current is defined
+    - _vagrant_plugins_current.stdout is defined
+    - _vagrant_plugins_current.stdout is not search(item)
+  loop: "{{ vagrant_plugins }}"
   tags:
     - skip_ansible_lint
