@@ -9,8 +9,8 @@ asdf_plugins__iac:
     global: '1.4.3'
   - name: terraform
     versions:
-      - '0.12.7'
-    global: '0.12.7'
+      - '0.12.8'
+    global: '0.12.8'
   - name: terraform-validator
     versions:
       - '3.1.0'
