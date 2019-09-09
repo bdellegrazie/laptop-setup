@@ -1,0 +1,4 @@
+---
+packages_apt__displaylink:
+  - "dkms"
+  - "unzip"

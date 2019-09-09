@@ -1,0 +1,7 @@
+---
+displaylink_become_user: "{{ lookup('env','USER') }}"
+displaylink_become_user_home: "{{ lookup('env','HOME') }}"
+displaylink_version: "5.2"
+displaylink_url: "https://www.displaylink.com/downloads/file?id=1369"
+displaylink_file: "DisplayLink USB Graphics Software for Ubuntu {{ displaylink_version }}.zip"
+displaylink_cache: "{{ lookup('env','HOME') ~ '/Downloads' }}"

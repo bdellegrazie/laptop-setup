@@ -1,0 +1,79 @@
+---
+# DisplayLink: creates a module "evdi"
+# No easy way to determine the version of the Driver
+# No easy way to download this without accepting an EULA, so this should be pre-downloaded
+- name: Stat DKMS Driver
+  become: true
+  stat:
+    get_attributes: false
+    get_checksum: false
+    get_mime: false
+    path: "{{ displaylink_dkms_dir }}"
+  register: _displaylink_dkms_dir
+  check_mode: false
+
+- name: Install DisplayLink DKMS Driver
+  vars:
+    _displaylink_archive: "{{ displaylink_cache ~ '/' ~ displaylink_file }}"
+  block:
+    - name: Stat Driver Archive
+      become: true
+      become_user: "{{ displaylink_become_user }}"
+      stat:
+        get_attributes: false
+        get_checksum: false
+        get_mime: false
+        path: "{{ _displaylink_archive }}"
+      check_mode: false
+      register: _displaylink_file
+
+    - name: Assert Driver Archive available
+      assert:
+        that:
+          - _displaylink_file is defined
+          - _displaylink_file.stat is defined
+          - _displaylink_file.stat.exists
+        fail_msg: "{{ _displaylink_archive }} is not found, please download from: {{ displaylink_url }}"
+
+    - name: Temporary Archive Dir
+      become: true
+      become_user: "{{ displaylink_become_user }}"
+      tempfile:
+        state: directory
+        suffix: displaylink
+      register: _displaylink_archive_dir
+
+    - name: Expand Driver Archive
+      become: true
+      become_user: "{{ displaylink_become_user }}"
+      unarchive:
+        src: "{{ _displaylink_archive }}"
+        dest: "{{ _displaylink_archive_dir.path }}"
+        remote_src: true
+        mode: "u=rwx,g=rx,o="
+        creates: "{{ _displaylink_archive_dir.path ~ '/displaylink-driver-' ~ displaylink_version ~ '.*.run' }}"
+      when:
+        - _displaylink_archive_dir is defined
+        - _displaylink_archive_dir.path is defined
+
+    - name: Install Driver
+      become: true
+      shell: "{{ _displaylink_archive_dir.path }}/displaylink-driver-{{ displaylink_version }}.??.run --quiet --accept --noprogress --nox11"
+      args:
+        creates: "{{ displaylink_dkms_dir }}"
+        executable: /bin/bash
+      when:
+        - _displaylink_archive_dir is defined
+        - _displaylink_archive_dir.path is defined
+  always:
+    - name: Remove Archive Dir
+      become: true
+      file:
+        path: "{{ _displaylink_archive_dir.path }}"
+        state: absent
+      when:
+        - _displaylink_archive_dir is defined
+        - _displaylink_archive_dir.path is defined
+  when:
+    - _displaylink_dkms_dir is defined
+    - _displaylink_dkms_dir.stat is not defined or (_displaylink_dkms_dir.stat is defined and not _displaylink_dkms_dir.stat.exists)

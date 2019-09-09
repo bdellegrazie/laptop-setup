@@ -19,6 +19,9 @@
         - packages
     - role: kvm
       kvm_user: "{{ target_user }}"
+    - role: displaylink
+      displaylink_become_user: "{{ target_user }}"
+      displaylink_become_user_home: "{{ target_user_home }}"
     - role: docker
     - role: asdf
       asdf_become_user: "{{ target_user }}"

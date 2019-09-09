@@ -21,6 +21,9 @@ localhost
 [chrome]
 localhost
 
+[displaylink]
+localhost
+
 [docker]
 localhost
 
