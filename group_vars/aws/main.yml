@@ -8,5 +8,5 @@
 asdf_plugins__aws:
   - name: eksctl
     versions:
-      - '0.5.2'
-    global: '0.5.2'
+      - '0.5.3'
+    global: '0.5.3'
