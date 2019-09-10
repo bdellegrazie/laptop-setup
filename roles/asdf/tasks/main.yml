@@ -14,12 +14,12 @@
 - name: Install plugins
   become: true
   become_user: "{{ asdf_become_user }}"
-  command: "asdf plugin-add {{ item }}"
+  command: "asdf plugin-add {{ item['name'] }} {{ item['url'] | default('') }}"
   args:
-    creates: "{{ _asdf_root ~ '/plugins/' ~ item ~ '/' }}"
+    creates: "{{ _asdf_root ~ '/plugins/' ~ item['name'] ~ '/' }}"
   environment:
     PATH: "{{ _asdf_root ~ '/bin:' ~ ansible_env.PATH }}"
-  loop: "{{ asdf_plugins | map(attribute='name') | list }}"
+  loop: "{{ asdf_plugins | mapattributes(['name','url']) | list }}"
 
 - name: Install tool versions
   become: true

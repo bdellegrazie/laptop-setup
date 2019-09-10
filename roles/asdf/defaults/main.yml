@@ -5,6 +5,7 @@ asdf_repo: https://github.com/asdf-vm/asdf.git
 asdf_version: 'HEAD'
 asdf_plugins: []
 #  - name: abc
+#    url: <git url> (non-default plugins)
 #    versions:
 #      - '1.0'
 #      - '1.1'

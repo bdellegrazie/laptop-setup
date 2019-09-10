@@ -12,9 +12,17 @@ repositories_apt_pre__docker:
   - 'ca-certificates'
   - 'curl'
   - 'gnupg-agent'
+  - 'jq'
   - 'software-properties-common'
 
 packages_apt__docker:
   - 'docker-ce'
   - 'docker-ce-cli'
   - 'containerd.io'
+
+asdf_plugins__docker:
+  - name: docker-compose
+    url: https://github.com/virtualstaticvoid/asdf-docker-compose.git
+    versions:
+      - '1.24.1'
+    global: '1.24.1'
