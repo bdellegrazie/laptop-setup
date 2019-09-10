@@ -12,6 +12,9 @@ localhost
 [aws]
 localhost
 
+[azul]
+#localhost
+
 [azure]
 localhost
 

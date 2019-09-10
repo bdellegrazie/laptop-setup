@@ -1,0 +1,11 @@
+---
+repositories_apt_key__azul:
+  - url: https://assets.azul.com/files/0xB1998361219BD9C9.txt
+    id: '27BC0C8CB3D81623F59BDADCB1998361219BD9C9'
+
+repositories_apt__azul:
+  - filename: azul
+    repo: "deb http://repos.azulsystems.com/{{ ansible_facts['ansible_distribution'] }} stable main"
+
+packages_apt__azul:
+  - 'zulu-11'
