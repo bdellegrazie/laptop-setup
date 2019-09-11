@@ -63,6 +63,9 @@ localhost
 [libreoffice]
 localhost
 
+[logitech]
+#localhost
+
 [mono]
 localhost
 

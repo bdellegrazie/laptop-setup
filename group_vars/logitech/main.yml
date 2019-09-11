@@ -1,0 +1,4 @@
+---
+# https://github.com/pwr-Solaar/Solaar
+packages_apt__logitech:
+  - 'solaar-gnome3'
