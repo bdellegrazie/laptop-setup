@@ -45,6 +45,16 @@
 #     virtualbox_become_user: "{{ target_user }}"
 #     virtualbox_become_user_home: "{{ target_user_home }}"
 
+- hosts: displaylink
+  gather_facts: false
+  vars:
+    target_user: "{{ lookup('env','USER') }}"
+    target_user_home: "{{ lookup('env','HOME') }}"
+  roles:
+    - role: displaylink
+      displaylink_become_user: "{{ target_user }}"
+      displaylink_become_user_home: "{{ target_user_home }}"
+
 - hosts: azure
   gather_facts: false
   vars:
