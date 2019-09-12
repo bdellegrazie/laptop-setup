@@ -29,21 +29,21 @@
     - role: homebrew
       homebrew_become_user: "{{ target_user }}"
       homebrew_become_user_home: "{{ target_user_home }}"
-    - role: nvm
-      nvm_become_user: "{{ target_user }}"
-      nvm_become_user_home: "{{ target_user_home }}"
-    - role: pyenv
-      pyenv_become_user: "{{ target_user }}"
-      pyenv_become_user_home: "{{ target_user_home }}"
+    #- role: nvm
+    #  nvm_become_user: "{{ target_user }}"
+    #  nvm_become_user_home: "{{ target_user_home }}"
+    #- role: pyenv
+    #  pyenv_become_user: "{{ target_user }}"
+    #  pyenv_become_user_home: "{{ target_user_home }}"
     - role: powerline
       powerline_become_user: "{{ target_user }}"
       powerline_become_user_home: "{{ target_user_home }}"
     - role: vagrant
       vagrant_become_user: "{{ target_user }}"
       vagrant_become_user_home: "{{ target_user_home }}"
-#   - role: virtualbox
-#     virtualbox_become_user: "{{ target_user }}"
-#     virtualbox_become_user_home: "{{ target_user_home }}"
+    #- role: virtualbox
+    #  virtualbox_become_user: "{{ target_user }}"
+    #  virtualbox_become_user_home: "{{ target_user_home }}"
 
 - hosts: displaylink
   gather_facts: false

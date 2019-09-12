@@ -82,7 +82,7 @@ localhost
 localhost
 
 [pyenv]
-localhost
+#localhost
 
 [vagrant]
 localhost
