@@ -1,4 +1,12 @@
 ---
+- name: Docker Group Member
+  become: true
+  user:
+    append: true
+    groups:
+      - docker
+    name: "{{ docker_target_user }}"
+
 - name: Docker configuration
   become: true
   copy:
@@ -10,25 +18,25 @@
   notify:
     - restart Docker
 
-- name: Docker Service Override Dir
-  become: true
-  file:
-    dest: /etc/systemd/system/docker.service.d
-    owner: root
-    group: root
-    state: directory
-    mode: "u=rwx,go=rx"
+#- name: Docker Service Override Dir
+#  become: true
+#  file:
+#    dest: /etc/systemd/system/docker.service.d
+#    owner: root
+#    group: root
+#    state: directory
+#    mode: "u=rwx,go=rx"
 
-- name: Docker Service Override
-  become: true
-  template:
-    dest: /etc/systemd/system/docker.service.d/listeners.conf
-    src: docker.service.j2
-    owner: root
-    group: root
-    mode: "u=rw,go=r"
-  notify:
-    - restart Docker
+#- name: Docker Service Override
+#  become: true
+# template:
+#    dest: /etc/systemd/system/docker.service.d/listeners.conf
+#    src: docker.service.j2
+#    owner: root
+#    group: root
+#    mode: "u=rw,go=r"
+#  notify:
+#    - restart Docker
 
 - name: Docker Service
   become: true

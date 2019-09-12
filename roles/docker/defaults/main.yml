@@ -1,4 +1,5 @@
 ---
+docker_target_user: "{{ lookup('env','USER') }}"
 # Insecure registry is for minikube
 docker_daemon_config:
   "insecure-registries":
