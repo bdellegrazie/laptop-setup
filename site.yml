@@ -2,11 +2,14 @@
 - hosts: all
   become: true
   gather_facts: true
-  tasks:
+  pre_tasks:
     - name: Variables
       include_vars: vars/main.yml
+  tags:
+    - always
 
 - hosts: all
+  become: true
   gather_facts: false
   roles:
     - role: repositories
@@ -23,6 +26,8 @@
   roles:
     - role: kvm
       kvm_user: "{{ target_user }}"
+      tags:
+        - kvm
 
 - hosts: displaylink
   gather_facts: false
@@ -30,11 +35,16 @@
     - role: displaylink
       displaylink_become_user: "{{ target_user }}"
       displaylink_become_user_home: "{{ target_user_home }}"
+      tags:
+        - displaylink
 
 - hosts: docker
   gather_facts: false
   roles:
     - role: docker
+      docker_target_user: "{{ target_user }}"
+      tags:
+        - docker
 
 - hosts: asdf
   gather_facts: false
@@ -42,6 +52,8 @@
     - role: asdf
       asdf_become_user: "{{ target_user }}"
       asdf_become_user_home: "{{ target_user_home }}"
+      tags:
+        - asdf
 
 - hosts: homebrew
   gather_facts: false
@@ -49,6 +61,8 @@
     - role: homebrew
       homebrew_become_user: "{{ target_user }}"
       homebrew_become_user_home: "{{ target_user_home }}"
+      tags:
+        - homebrew
 
 - hosts: nvm
   gather_facts: false
@@ -56,6 +70,8 @@
     - role: nvm
       nvm_become_user: "{{ target_user }}"
       nvm_become_user_home: "{{ target_user_home }}"
+      tags:
+        - nvm
 
 - hosts: pyenv
   gather_facts: false
@@ -63,6 +79,8 @@
     - role: pyenv
       pyenv_become_user: "{{ target_user }}"
       pyenv_become_user_home: "{{ target_user_home }}"
+      tags:
+        - pyenv
 
 - hosts: powerline
   gather_facts: false
@@ -70,6 +88,8 @@
     - role: powerline
       powerline_become_user: "{{ target_user }}"
       powerline_become_user_home: "{{ target_user_home }}"
+      tags:
+        - powerline
 
 - hosts: vagrant
   gather_facts: false
@@ -77,6 +97,8 @@
     - role: vagrant
       vagrant_become_user: "{{ target_user }}"
       vagrant_become_user_home: "{{ target_user_home }}"
+      tags:
+        - vagrant
 
 - hosts: virtualbox
   gather_facts: false
@@ -84,9 +106,13 @@
     - role: virtualbox
       virtualbox_become_user: "{{ target_user }}"
       virtualbox_become_user_home: "{{ target_user_home }}"
+      tags:
+        - virtualbox
 
 - hosts: azure
   gather_facts: false
   roles:
     - role: az-cli-extensions
       az_cli_extensions_user: "{{ target_user }}"
+      tags:
+        - azure
