@@ -2,12 +2,12 @@
 - hosts: all
   become: true
   gather_facts: true
+  tasks:
+    - name: Variables
+      include_vars: vars/main.yml
 
 - hosts: all
   gather_facts: false
-  vars:
-    target_user: "{{ lookup('env','USER') }}"
-    target_user_home: "{{ lookup('env','HOME') }}"
   roles:
     - role: repositories
       tags:
@@ -17,49 +17,76 @@
       packages_pip_become_user_home: "{{ target_user_home }}"
       tags:
         - packages
+
+- hosts: kvm
+  gather_facts: false
+  roles:
     - role: kvm
       kvm_user: "{{ target_user }}"
-    - role: displaylink
-      displaylink_become_user: "{{ target_user }}"
-      displaylink_become_user_home: "{{ target_user_home }}"
-    - role: docker
-    - role: asdf
-      asdf_become_user: "{{ target_user }}"
-      asdf_become_user_home: "{{ target_user_home }}"
-    - role: homebrew
-      homebrew_become_user: "{{ target_user }}"
-      homebrew_become_user_home: "{{ target_user_home }}"
-    #- role: nvm
-    #  nvm_become_user: "{{ target_user }}"
-    #  nvm_become_user_home: "{{ target_user_home }}"
-    #- role: pyenv
-    #  pyenv_become_user: "{{ target_user }}"
-    #  pyenv_become_user_home: "{{ target_user_home }}"
-    - role: powerline
-      powerline_become_user: "{{ target_user }}"
-      powerline_become_user_home: "{{ target_user_home }}"
-    - role: vagrant
-      vagrant_become_user: "{{ target_user }}"
-      vagrant_become_user_home: "{{ target_user_home }}"
-    #- role: virtualbox
-    #  virtualbox_become_user: "{{ target_user }}"
-    #  virtualbox_become_user_home: "{{ target_user_home }}"
 
 - hosts: displaylink
   gather_facts: false
-  vars:
-    target_user: "{{ lookup('env','USER') }}"
-    target_user_home: "{{ lookup('env','HOME') }}"
   roles:
     - role: displaylink
       displaylink_become_user: "{{ target_user }}"
       displaylink_become_user_home: "{{ target_user_home }}"
 
+- hosts: docker
+  gather_facts: false
+  roles:
+    - role: docker
+
+- hosts: asdf
+  gather_facts: false
+  roles:
+    - role: asdf
+      asdf_become_user: "{{ target_user }}"
+      asdf_become_user_home: "{{ target_user_home }}"
+
+- hosts: homebrew
+  gather_facts: false
+  roles:
+    - role: homebrew
+      homebrew_become_user: "{{ target_user }}"
+      homebrew_become_user_home: "{{ target_user_home }}"
+
+- hosts: nvm
+  gather_facts: false
+  roles:
+    - role: nvm
+      nvm_become_user: "{{ target_user }}"
+      nvm_become_user_home: "{{ target_user_home }}"
+
+- hosts: pyenv
+  gather_facts: false
+  roles:
+    - role: pyenv
+      pyenv_become_user: "{{ target_user }}"
+      pyenv_become_user_home: "{{ target_user_home }}"
+
+- hosts: powerline
+  gather_facts: false
+  roles:
+    - role: powerline
+      powerline_become_user: "{{ target_user }}"
+      powerline_become_user_home: "{{ target_user_home }}"
+
+- hosts: vagrant
+  gather_facts: false
+  roles:
+    - role: vagrant
+      vagrant_become_user: "{{ target_user }}"
+      vagrant_become_user_home: "{{ target_user_home }}"
+
+- hosts: virtualbox
+  gather_facts: false
+  roles:
+    - role: virtualbox
+      virtualbox_become_user: "{{ target_user }}"
+      virtualbox_become_user_home: "{{ target_user_home }}"
+
 - hosts: azure
   gather_facts: false
-  vars:
-    target_user: "{{ lookup('env','USER') }}"
-    target_user_home: "{{ lookup('env','HOME') }}"
   roles:
     - role: az-cli-extensions
       az_cli_extensions_user: "{{ target_user }}"
