@@ -29,6 +29,13 @@
       tags:
         - kvm
 
+- hosts: aws
+  gather_facts: false
+  roles:
+    - role: aws-session-manager
+      tags:
+        - aws
+
 - hosts: displaylink
   gather_facts: false
   roles:

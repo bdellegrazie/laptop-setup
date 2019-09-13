@@ -1,0 +1,5 @@
+---
+- name: Install AWS Session Manager Plugin
+  become: true
+  apt:
+    deb: "{{ aws_session_manager_url }}"
