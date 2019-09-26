@@ -23,6 +23,3 @@ packages_apt__docker:
 asdf_plugins__docker:
   - name: docker-compose
     url: https://github.com/virtualstaticvoid/asdf-docker-compose.git
-    versions:
-      - '1.24.1'
-    global: '1.24.1'

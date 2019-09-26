@@ -4,18 +4,6 @@ packages_apt__iac:
 
 asdf_plugins__iac:
   - name: packer
-    versions:
-      - '1.4.3'
-    global: '1.4.3'
   - name: terraform
-    versions:
-      - '0.12.8'
-    global: '0.12.8'
   - name: terraform-validator
-    versions:
-      - '3.1.0'
-    global: '3.1.0'
   - name: tflint
-    versions:
-      - '0.11.1'
-    global: '0.11.1'
