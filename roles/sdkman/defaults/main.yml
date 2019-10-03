@@ -1,0 +1,4 @@
+---
+sdkman_become_user: "{{ lookup('env','USER') }}"
+sdkman_become_user_home: "{{ lookup('env','HOME') }}"
+sdkman_url: https://get.sdkman.io

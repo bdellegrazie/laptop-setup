@@ -1,0 +1,7 @@
+---
+_sdkman_candidates: "{{ query('varnames', '^sdkman_candidate__.+') | map('extract', hostvars[inventory_hostname]) | list | flatten(levels=1) | unique }}"
+#_sdkman_candidate__<something>: []
+#  - name: abc
+#    versions: (optional)
+#      - '1.0'
+#      - '1.1'

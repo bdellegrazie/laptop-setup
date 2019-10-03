@@ -87,6 +87,9 @@ localhost
 [pyenv]
 #localhost
 
+[sdkman]
+localhost
+
 [vagrant]
 localhost
 

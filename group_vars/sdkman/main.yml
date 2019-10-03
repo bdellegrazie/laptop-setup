@@ -1,0 +1,7 @@
+---
+packages_apt__sdkman:
+  - bash
+  - curl
+  - sed
+  - unzip
+  - zip

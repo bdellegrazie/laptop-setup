@@ -1,0 +1,39 @@
+---
+- name: Local facts
+  set_fact:
+    _sdkman_root: "{{ sdkman_become_user_home ~ '/.sdkman' }}"
+
+# Pre-requisites installed by packages role
+
+- name: Install SDKMAN
+  become: true
+  become_user: "{{ sdkman_become_user }}"
+  shell: |
+    set -Eeuo pipefail
+    curl -s "{{ sdkman_url }}" | bash
+  args:
+    chdir: "{{ sdkman_become_user_home }}"
+    executable: /bin/bash
+    warn: false
+    creates: "{{ _sdkman_root }}/bin/sdkman-init.sh"
+
+- name: Install Candidates
+  become: true
+  become_user: "{{ sdkman_become_user }}"
+  shell: |
+    source ~/.sdkman/bin/sdkman-init.sh
+    sdk install {{ item.0.name ~ (' ' ~ item.1 if item.1 != 'current' else '') }}
+  args:
+    chdir: "{{ sdkman_become_user_home }}"
+    executable: /bin/bash
+    warn: false
+    creates: "{{ _sdkman_root ~ '/candidates/' ~ item.0.name  ~ '/' ~ item.1 }}"
+  environment:
+    sdkman_auto_answer: 'true'
+  loop: "{{
+    _sdkman_candidates | rejectattr('versions','defined') | product(['current']) | list |
+    union(
+      _sdkman_candidates | subelements('versions', skip_missing=True)
+    ) }}"
+  loop_control:
+    label: "{{ item.0.name  ~ '/' ~ item.1 }}"

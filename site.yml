@@ -71,6 +71,15 @@
       tags:
         - homebrew
 
+- hosts: sdkman
+  gather_facts: false
+  roles:
+    - role: sdkman
+      sdkman_become_user: "{{ target_user }}"
+      sdkman_become_user_home: "{{ target_user_home }}"
+      tags:
+        - sdkman
+
 - hosts: nvm
   gather_facts: false
   roles:
