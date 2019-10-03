@@ -1,3 +1,3 @@
 ---
-homebrew_taps: "{{ dict(hostvars[inventory_hostname]) | default({}) | key_startswith('homebrew_taps__') | list | default([]) | flatten(levels=1) | unique }}"
-homebrew_formulae: "{{ dict(hostvars[inventory_hostname]) | default({}) | key_startswith('homebrew_formulae__') | list | default([]) | flatten(levels=1) | sort | unique }}"
+homebrew_taps: "{{ query('varnames', '^homebrew_taps__.+') | map('extract', hostvars[inventory_hostname]) | list | flatten(levels=1) | unique }}"
+homebrew_formulae: "{{ query('varnames', '^homebrew_formulae__.+') | map('extract', hostvars[inventory_hostname]) | list | flatten(levels=1) | unique }}"

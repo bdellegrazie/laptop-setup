@@ -1,5 +1,5 @@
 ---
-packages_apt_debconf: "{{ dict(hostvars[inventory_hostname]) | default({}) | key_startswith('packages_apt_debconf__') | list | default([]) | flatten(levels=1) | sort | unique }}"
-packages_apt: "{{ dict(hostvars[inventory_hostname]) | default({}) | key_startswith('packages_apt__') | list | default([]) | flatten(levels=1) | sort | unique }}"
+packages_apt_debconf: "{{ query('varnames', '^packages_apt_debconf__.+') | map('extract', hostvars[inventory_hostname]) | list | flatten(levels=1) | sort | unique }}"
+packages_apt: "{{ query('varnames', '^packages_apt__.+') | map('extract', hostvars[inventory_hostname]) | list | flatten(levels=1) | sort | unique }}"
 
-packages_pip_user: "{{ dict(hostvars[inventory_hostname]) | default({}) | key_startswith('packages_pip_user__') | list | default([]) | flatten(levels=1) | sort | unique }}"
+packages_pip_user: "{{ query('varnames', '^packages_pip_user__.+') | map('extract', hostvars[inventory_hostname]) | list | flatten(levels=1) | sort | unique }}"

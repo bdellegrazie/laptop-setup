@@ -1,2 +1,2 @@
 ---
-asdf_plugins: "{{ dict(hostvars[inventory_hostname]) | default({}) | key_startswith('asdf_plugins__') | list | default([]) | flatten(levels=1) | unique }}"
+asdf_plugins: "{{ query('varnames', '^asdf_plugins__.+') | map('extract', hostvars[inventory_hostname]) | list | flatten(levels=1) | unique }}"
