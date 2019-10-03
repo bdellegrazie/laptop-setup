@@ -1,6 +1,5 @@
 ---
 asdf_plugins__kubernetes:
   - name: helm
-  - name: kops
   - name: kubectl
   - name: minikube
