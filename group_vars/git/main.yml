@@ -1,5 +1,4 @@
 ---
-
 repositories_apt__git:
   - repo: 'ppa:git-core/ppa'
 

@@ -1,0 +1,6 @@
+---
+repositories_apt__wireguard:
+  - repo: 'ppa:wireguard/wireguard'
+
+packages_apt__wireguard:
+  - 'wireguard'

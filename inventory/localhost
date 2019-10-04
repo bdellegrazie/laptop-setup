@@ -90,6 +90,9 @@ localhost
 [sdkman]
 localhost
 
+[utils]
+localhost
+
 [vagrant]
 localhost
 
@@ -102,5 +105,5 @@ localhost
 [vscode]
 localhost
 
-[utils]
+[wireguard]
 localhost
