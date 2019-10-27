@@ -1,6 +1,7 @@
 ---
 packages_apt__kvm:
   - libvirt-bin
+  - ovmf
   - qemu-kvm
   - virtinst
   - virt-manager
