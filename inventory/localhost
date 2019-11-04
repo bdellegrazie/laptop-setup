@@ -24,6 +24,9 @@ localhost
 [chrome]
 localhost
 
+[concourse]
+localhost
+
 [displaylink]
 #localhost
 

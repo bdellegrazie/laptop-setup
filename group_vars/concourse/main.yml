@@ -1,0 +1,3 @@
+---
+asdf_plugins__concourse:
+  - name: concourse
