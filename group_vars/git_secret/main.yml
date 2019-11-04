@@ -1,0 +1,11 @@
+---
+repositories_apt_key__git_secret:
+  - url: https://api.bintray.com/users/sobolevn/keys/gpg/public.key
+    id: '3F6816BDCE0866AB3CBB4EA0174B4F3C8D8222C1'
+
+repositories_apt__git_secret:
+  - filename: git_secret
+    repo: 'deb [arch=amd64] https://dl.bintray.com/sobolevn/deb git-secret main'
+
+packages_apt__git_secret:
+  - 'git-secret'

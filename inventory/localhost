@@ -39,6 +39,9 @@ localhost
 [git]
 localhost
 
+[git_secret]
+localhost
+
 [go]
 localhost
 
