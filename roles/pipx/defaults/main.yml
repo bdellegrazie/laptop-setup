@@ -1,0 +1,4 @@
+---
+pipx_become_user: "{{ lookup('env','USER') }}"
+pipx_become_user_home: "{{ lookup('env','HOME') }}"
+pipx_packages: []

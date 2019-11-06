@@ -25,6 +25,12 @@
       tags:
         - packages
         - packages_pip
+    - role: pipx
+      pipx_become_user: "{{ target_user }}"
+      pipx_become_user_home: "{{ target_user_home }}"
+      tags:
+        - packages
+        - packages_pipx
 
 - hosts: kvm
   gather_facts: false

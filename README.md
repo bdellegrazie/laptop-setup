@@ -7,7 +7,7 @@ Combine with [dotfiles](https://github.com/bdellegrazie/dotfiles)
 
 * It is assumed this is being run from the target laptop, although the code will work remotely
 * [dotfiles](https://github.com/bdellegrazie/dotfiles) install process should have already been executed
-* pipenv should be installed, most easily at the user level (`pip3 install --user pipenv`)
+* pipenv should be installed, using pipx (`pipx install pipenv`)
 * If using [DisplayLink drivers](https://www.displaylink.com/downloads), download the driver first and put it in ~/Downloads as the driver is behind an "accept license" page.
   However, it has caused problems with the NVidia binary drivers, so prefer DisplayPort instead
 

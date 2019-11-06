@@ -1,0 +1,8 @@
+---
+- name: Install PipX Packages
+  become: true
+  become_user: "{{ pipx_become_user }}"
+  command: "pipx install {{ item }}"
+  args:
+    creates: "{{ pipx_become_user_home ~ '/.local/bin/' ~ item }}"  # This will not work for everything
+  loop: "{{ pipx_packages }}"

@@ -1,0 +1,4 @@
+---
+pip_packages_user__pipx:
+  - pipx
+pipx_packages: "{{ query('varnames', '^pipx_packages__.+') | map('extract', hostvars[inventory_hostname]) | list | flatten(levels=1) | sort | unique }}"
