@@ -1,0 +1,34 @@
+---
+- name: Detect local pip
+  become: true
+  become_user: "{{ pip_become_user }}"
+  stat:
+    path: "{{ pip_executable }}"
+    get_attributes: false
+    get_checksum: false
+    get_mime: false
+  register: _pip_local
+
+- name: Install pip locally
+  become: true
+  become_user: "{{ pip_become_user }}"
+  pip:
+    name: "pip"
+    executable: "/usr/bin/pip3"
+    extra_args: --user
+    state: latest
+  tags:
+    - skip_ansible_lint
+  when:
+    - pip_upgrade | bool
+    - _pip_local.stat is defined
+    - not _pip_local.stat.exists
+
+- name: Install pip user packages
+  become: true
+  become_user: "{{ pip_become_user }}"
+  pip:
+    name: "{{ pip_packages_user }}"
+    executable: "{{ pip_executable | default(omit) }}"
+    extra_args: --user
+    state: present

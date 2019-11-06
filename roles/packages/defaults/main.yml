@@ -4,5 +4,3 @@ packages_apt_pre:
 packages_apt: []
 packages_become_user: "{{ lookup('env','USER') }}"
 packages_become_user_home: "{{ lookup('env','HOME') }}"
-packages_pip_user: []
-packages_pip_executable: "{{ packages_pip_become_user_home ~ '/.local/bin/pip3' }}"

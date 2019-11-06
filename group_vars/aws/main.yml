@@ -1,6 +1,6 @@
 ---
 # Put these in a custom python-env instead to avoid dependency issues
-#packages_pip_user__aws:
+#pip_packages_user__aws:
 #  - awscli
 #  - aws-shell
 #  - aws-sam-cli

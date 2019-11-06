@@ -16,10 +16,15 @@
       tags:
         - repositories
     - role: packages
-      packages_become_user: "{{ target_user }}"
-      packages_become_user_home: "{{ target_user_home }}"
       tags:
         - packages
+        - packages_apt
+    - role: pip
+      pip_become_user: "{{ target_user }}"
+      pip_become_user_home: "{{ target_user_home }}"
+      tags:
+        - packages
+        - packages_pip
 
 - hosts: kvm
   gather_facts: false

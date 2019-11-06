@@ -1,0 +1,5 @@
+pip_become_user: "{{ lookup('env','USER') }}"
+pip_become_user_home: "{{ lookup('env','HOME') }}"
+pip_executable: "{{ pip_become_user_home ~ '/.local/bin/pip3' }}"
+pip_packages_user: []
+pip_upgrade: true
