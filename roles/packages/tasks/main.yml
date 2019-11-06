@@ -25,7 +25,7 @@
 
 - name: Install pip user packages
   become: true
-  become_user: "{{ packages_pip_become_user }}"
+  become_user: "{{ packages_become_user }}"
   pip:
     name: "{{ packages_pip_user }}"
     executable: "{{ packages_pip_executable | default(omit) }}"

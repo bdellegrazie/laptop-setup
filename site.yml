@@ -16,8 +16,8 @@
       tags:
         - repositories
     - role: packages
-      packages_pip_become_user: "{{ target_user }}"
-      packages_pip_become_user_home: "{{ target_user_home }}"
+      packages_become_user: "{{ target_user }}"
+      packages_become_user_home: "{{ target_user_home }}"
       tags:
         - packages
 
