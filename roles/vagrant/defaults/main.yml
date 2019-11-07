@@ -4,6 +4,6 @@ vagrant_become_user_home: "{{ lookup('env','HOME') }}"
 vagrant_version: "2.2.6"
 vagrant_checksum: "sha1:efca0312288ad3cc13ee7783813ca7f1d780b4ed"
 vagrant_url: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.deb"
-vagrant_cache: "{{ lookup('env','HOME') ~ '/Downloads' }}"
+vagrant_cache: "{{ vagrant_become_user_home ~ '/Downloads' }}"
 vagrant_plugins:
   - vagrant-libvirt
