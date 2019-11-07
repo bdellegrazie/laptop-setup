@@ -48,6 +48,9 @@ localhost
 [go]
 localhost
 
+[gpgme]
+localhost
+
 [homebrew]
 localhost
 

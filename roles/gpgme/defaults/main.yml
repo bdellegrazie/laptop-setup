@@ -1,0 +1,27 @@
+---
+gpgme_become_user: "{{ lookup('env','USER') }}"
+gpgme_become_user_home: "{{ lookup('env','HOME') }}"
+gpgme_version: '1.13.1'
+gpgme_libassuan_version: '2.5.3'
+gpgme_libgpg_error_version: '1.36'
+gpgme_artifacts:
+  - name: libgpg-error-{{ gpgme_libgpg_error_version }}.tar.bz2
+    url: 'https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-{{ gpgme_libgpg_error_version }}.tar.bz2'
+    checksum: 'sha1:5245ce38b198cecd57775fb3c7b7328ec1a2a615'
+  - name: libgpg-error-{{ gpgme_libgpg_error_version }}.tar.bz2.sig
+    url: 'https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-{{ gpgme_libgpg_error_version }}.tar.bz2'
+    checksum: 'sha1:bcd9e1af0ba293e04228eda00ea4d1ef36413b66'
+  - name: libassuan-{{ gpgme_libassuan_version }}.tar.bz2
+    url: 'https://gnupg.org/ftp/gcrypt/libassuan/libassuan-{{ gpgme_libassuan_version }}.tar.bz2'
+    checksum: 'sha1:6d81bf42fa91ed2894df8b65764ce899e39776f8'
+  - name: libassuan-{{ gpgme_libassuan_version }}.tar.bz2.sig
+    url: 'https://gnupg.org/ftp/gcrypt/libassuan/libassuan-{{ gpgme_libassuan_version }}.tar.bz2.sig'
+    checksum: 'sha1:a557a426adaa45dc1cbfc4efd73aa623bf9ca98b'
+  - name: gpgme-{{ gpgme_version }}.tar.bz2
+    url: 'https://gnupg.org/ftp/gcrypt/gpgme/gpgme-{{ gpgme_version }}.tar.bz2'
+    checksum: 'sha1:f87f34e695e8d74ccc7c8f42864d50630afebb0e'
+  - name: gpgme-{{ gpgme_version }}.tar.bz2.sig
+    url: 'https://gnupg.org/ftp/gcrypt/gpgme/gpgme-{{ gpgme_version }}.tar.bz2.sig'
+    checksum: 'sha1:f46126223fea9cd5624127d5abde83bdba8b2f90'
+gpgme_cache: "{{ gpgme_become_user_home ~ '/Downloads' }}"
+gpgme_gpg_signing_keys_checksum: 'b233f2a52112773fb89ef656c236a5dd66bbc3e8'

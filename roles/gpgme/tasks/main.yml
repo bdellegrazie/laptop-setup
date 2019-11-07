@@ -1,0 +1,108 @@
+---
+- name: Set Facts
+  set_fact:
+    _gpgme_cache: "{{ gpgme_become_user_home ~ '/Downloads' }}"
+    _gpgme_name: "{{ 'gpgme-' ~ gpgme_version }}"
+    _libgpg_error_name: "{{ 'libgpg-error-' ~ gpgme_libgpg_error_version }}"
+    _libassuan_name: "{{ 'libassuan-' ~ gpgme_libassuan_version }}"
+    _build_dir: "{{ gpgme_become_user_home ~ '/projects/private' }}"
+    _configure_prefix: "{{ gpgme_become_user_home ~ '/.local' }}"
+
+- name: Get Downloads
+  become: true
+  become_user: "{{ gpgme_become_user }}"
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ _gpgme_cache ~ '/' ~ item.name }}"
+    checksum: "{{ item.checksum }}"
+    mode: "u=rw,g=r,o="
+  loop: "{{ gpgme_artifacts }}"
+
+- name: Copy Signing Key
+  become: true
+  become_user: "{{ gpgme_become_user }}"
+  copy:
+    checksum: "{{ gpgme_gpg_signing_keys_checksum }}"
+    dest: "{{ gpgme_cache ~ '/gpgme-signing-keys.pub' }}"
+    mode: "u=rw,go=r"
+    src: "files/gpg-signing-keys.pub"
+
+- name: Import Signing Keys
+  become: true
+  become_user: "{{ gpgme_become_user }}"
+  command: "/usr/bin/gpg --batch --with-colons --import {{ gpgme_cache ~ '/gpgme-signing-keys.pub' }}"
+  args:
+    chdir: "{{ gpgme_become_user_home }}"
+  register: _gpg_import
+  failed_when:
+    - _gpg_import.rc != 0
+  changed_when:
+    - _gpg_import.rc == 0
+    - _gpg_import.stdout.find('imported') != -1
+
+- name: Check Signature
+  become: true
+  become_user: "{{ gpgme_become_user }}"
+  command: "/usr/bin/gpg --batch --with-colons --verify {{ item }}.tar.bz2.sig {{ item }}.tar.bz2"
+  args:
+    chdir: "{{ _gpgme_cache }}"
+  changed_when: false
+  loop:
+    - '{{ _libgpg_error_name }}'
+    - '{{ _libassuan_name }}'
+    - '{{ _gpgme_name }}'
+
+- name: Directories
+  become: true
+  become_user: "{{ gpgme_become_user }}"
+  file:
+    mode: "u=rwx,g=rx,o="
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - '{{ _build_dir }}'
+    - '{{ gpgme_become_user_home ~ "/.config/chromium-chrome/NativeMessagingHosts" }}'
+    - '{{ gpgme_become_user_home ~ "/.config/google-chrome/NativeMessagingHosts" }}'
+    - '{{ gpgme_become_user_home ~ "/.mozilla/native-messaging-hosts" }}'
+
+- name: Expand Archive
+  become: true
+  become_user: "{{ gpgme_become_user }}"
+  unarchive:
+    creates: "{{ _build_dir ~ '/' ~ item ~ '/VERSION' }}"
+    dest: "{{ _build_dir }}"
+    remote_src: true
+    src: "{{ _gpgme_cache ~ '/' ~ item ~ '.tar.bz2' }}"
+  loop:
+    - '{{ _libgpg_error_name }}'
+    - '{{ _libassuan_name }}'
+    - '{{ _gpgme_name }}'
+
+- name: Build and Install
+  become: true
+  become_user: "{{ gpgme_become_user }}"
+  shell: |
+    ./configure --prefix={{ _configure_prefix }} --enable-static {{ item.options | default('') }}
+    make
+    make install
+  args:
+    chdir: "{{ _build_dir ~ '/' ~ item.name }}"
+    creates: "{{ gpgme_become_user_home ~ '/.local/lib/' ~ item.artifact }}"
+  environment:
+    PYTHON: 3
+  loop:
+    - { name: "{{ _libgpg_error_name }}", artifact: "libgpg-error.so" }
+    - { name: "{{ _libassuan_name }}", options: "--with-libgpg-error-prefix={{ _configure_prefix }}", artifact: "libassuan.so" }
+    - { name: "{{ _gpgme_name }}", options: "--with-libgpg-error-prefix={{ _configure_prefix }} --with-libassuan-prefix={{ _configure_prefix }}", artifact: "libgpgme.so" }
+
+- name: Install Browser Extensions
+  become: true
+  become_user: "{{ gpgme_become_user }}"
+  template:
+    dest: "{{ gpgme_become_user_home ~ '/' ~ item.dest ~ '/gpgmejson.json' }}"
+    mode: "u=rw,go=r"
+    src: "{{ item.src }}"
+  loop:
+    - { src: "chrome.gpgme.json.j2", dest: ".config/chromium-chrome/NativeMessagingHosts" }
+    - { src: "chrome.gpgme.json.j2", dest: ".config/google-chrome/NativeMessagingHosts" }
+    - { src: "firefox.gpgme.json.j2", dest: ".mozilla/native-messaging-hosts" }

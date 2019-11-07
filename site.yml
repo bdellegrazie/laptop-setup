@@ -73,6 +73,15 @@
       tags:
         - asdf
 
+- hosts: gpgme
+  gather_facts: false
+  roles:
+    - role: gpgme
+      gpgme_become_user: "{{ target_user }}"
+      gpgme_become_user_home: "{{ target_user_home }}"
+      tags:
+        - gpgme
+
 - hosts: homebrew
   gather_facts: false
   roles:

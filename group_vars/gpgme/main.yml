@@ -1,0 +1,6 @@
+---
+packages_apt__gpgme:
+  - build-essential
+  - gpg
+  - libreadline-dev
+  - readline-common
