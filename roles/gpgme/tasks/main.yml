@@ -16,6 +16,9 @@
     dest: "{{ _gpgme_cache ~ '/' ~ item.name }}"
     checksum: "{{ item.checksum }}"
     mode: "u=rw,g=r,o="
+  register: _downloads
+  until: _downloads is not failed
+  retries: 3
   loop: "{{ gpgme_artifacts }}"
 
 - name: Copy Signing Key
