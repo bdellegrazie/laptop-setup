@@ -2,10 +2,15 @@
 repositories_apt__git:
   - repo: 'ppa:git-core/ppa'
 
+# libsecret / libglib2.0 are for build git-credential-libsecrt (git contrib)
 packages_apt__git:
   - git
   - git-gui
   - git-merge-changelog
   - git-review
   - gitpkg
+  - libglib2.0-0
+  - libglib2.0-dev
+  - libsecret-1-0
+  - libsecret-1-dev
   - meld

@@ -1,0 +1,46 @@
+---
+- name: Facts
+  set_fact:
+    _bin_dir: "{{ '/usr/local/bin' }}"
+    _build_dir: "{{ git_become_user_home ~ '/projects/private/' ~ git_credential_libsecret_name }}"
+
+- name: Directories
+  become: true
+  become_user: "{{ git_become_user }}"
+  file:
+    mode: "u=rwx,g=rx,o="
+    path: "{{ _build_dir }}"
+    state: directory
+
+- name: Copy Sources
+  become: true
+  become_user: "{{ git_become_user }}"
+  copy:
+    dest: "{{ _build_dir ~ '/' }}"
+    mode: "preserve"
+    remote_src: true
+    src: "{{ git_credential_libsecret_src ~ '/' }}"
+
+- name: Build
+  become: true
+  become_user: "{{ git_become_user }}"
+  shell: make all
+  args:
+    chdir: "{{ _build_dir }}"
+    creates: "{{ _build_dir ~ '/' ~ git_credential_libsecret_name }}"
+
+- name: Copy Binaries
+  become: true
+  copy:
+    dest: "{{ _bin_dir ~ '/' ~ git_credential_libsecret_name }}"
+    mode: "u=rwx,go=rx"
+    remote_src: true
+    src: "{{ _build_dir ~ '/' ~ git_credential_libsecret_name }}"
+
+- name: Git Config
+  become: true
+  git_config:
+    name: credential.helper
+    scope: system
+    state: present
+    value: "{{ _bin_dir ~ '/' ~ git_credential_libsecret_name }}"

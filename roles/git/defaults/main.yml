@@ -1,0 +1,5 @@
+---
+git_become_user: "{{ lookup('env','USER') }}"
+git_become_user_home: "{{ lookup('env','HOME') }}"
+git_credential_libsecret_src: /usr/share/doc/git/contrib/credential/libsecret
+git_credential_libsecret_name: git-credential-libsecret

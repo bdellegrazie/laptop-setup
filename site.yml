@@ -73,6 +73,15 @@
       tags:
         - asdf
 
+- hosts: git
+  gather_facts: false
+  roles:
+    - role: git
+      git_become_user: "{{ target_user }}"
+      git_become_user_home: "{{ target_user_home }}"
+      tags:
+        - git
+
 - hosts: gpgme
   gather_facts: false
   roles:
