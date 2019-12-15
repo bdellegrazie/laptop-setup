@@ -5,7 +5,7 @@ repositories_apt_key__keybase:
 
 repositories_apt__keybase:
   - filename: keybase
-    repo: 'deb http://prerelease.keybase.io/deb stable main'
+    repo: 'deb https://prerelease.keybase.io/deb stable main'
 
 packages_apt__keybase:
   - 'keybase'

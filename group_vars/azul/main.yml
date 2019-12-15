@@ -5,7 +5,7 @@ repositories_apt_key__azul:
 
 repositories_apt__azul:
   - filename: azul
-    repo: "deb http://repos.azulsystems.com/{{ ansible_distribution | lower }} stable main"
+    repo: "deb https://repos.azulsystems.com/{{ ansible_distribution | lower }} stable main"
 
 packages_apt__azul:
   - 'zulu-11'
