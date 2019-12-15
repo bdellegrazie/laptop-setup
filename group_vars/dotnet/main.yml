@@ -10,4 +10,4 @@ repositories_apt__dotnet:
     repo: 'deb [arch=amd64] https://packages.microsoft.com/{{ ansible_lsb["id"] | lower }}/{{ ansible_lsb["release"] | lower }}/prod {{ ansible_lsb["codename"] | lower }} main'
 
 packages_apt__dotnet:
-  - 'dotnet-sdk-2.2'
+  - 'dotnet-sdk-3.1'
