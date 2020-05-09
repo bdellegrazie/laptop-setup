@@ -51,8 +51,8 @@
     chdir: "{{ _gpgme_cache }}"
   changed_when: false
   loop:
-    - '{{ _libgpg_error_name }}'
-    - '{{ _libassuan_name }}'
+    #- '{{ _libgpg_error_name }}'
+    #- '{{ _libassuan_name }}'
     - '{{ _gpgme_name }}'
 
 - name: Directories
@@ -77,26 +77,37 @@
     remote_src: true
     src: "{{ _gpgme_cache ~ '/' ~ item ~ '.tar.bz2' }}"
   loop:
-    - '{{ _libgpg_error_name }}'
-    - '{{ _libassuan_name }}'
+    #- '{{ _libgpg_error_name }}'
+    #- '{{ _libassuan_name }}'
     - '{{ _gpgme_name }}'
 
-- name: Build and Install
+- name: Build
   become: true
   become_user: "{{ gpgme_become_user }}"
   shell: |
     ./configure --prefix={{ _configure_prefix }} --enable-static {{ item.options | default('') }}
     make
-    make install
   args:
     chdir: "{{ _build_dir ~ '/' ~ item.name }}"
-    creates: "{{ gpgme_become_user_home ~ '/.local/lib/' ~ item.artifact }}"
+    creates: "{{ _build_dir ~ '/' ~ item.name ~ '/src/.libs/' ~ item.artifact }}"
   environment:
     PYTHON: 3
   loop:
-    - { name: "{{ _libgpg_error_name }}", artifact: "libgpg-error.so" }
-    - { name: "{{ _libassuan_name }}", options: "--with-libgpg-error-prefix={{ _configure_prefix }}", artifact: "libassuan.so" }
-    - { name: "{{ _gpgme_name }}", options: "--with-libgpg-error-prefix={{ _configure_prefix }} --with-libassuan-prefix={{ _configure_prefix }}", artifact: "libgpgme.so" }
+    #- { name: "{{ _libgpg_error_name }}", artifact: "libgpg-error.so" }
+    #- { name: "{{ _libassuan_name }}", options: "--with-libgpg-error-prefix={{ _configure_prefix }}", artifact: "libassuan.so" }
+    #- { name: "{{ _gpgme_name }}", options: "--with-libgpg-error-prefix={{ _configure_prefix }} --with-libassuan-prefix={{ _configure_prefix }}", artifact: "libgpgme.so" }
+    #- { name: "{{ _gpgme_name }}", options: "--with-libgpg-error-prefix={{ _configure_prefix }} --with-libassuan-prefix={{ _configure_prefix }}", artifact: "libgpgme.so" }
+    - { name: "{{ _gpgme_name }}", artifact: "libgpgme.so" }
+
+- name: Install
+  become: true
+  copy:
+    src: "{{ _build_dir ~ '/' ~ _gpgme_name ~ '/src/.libs/gpgme-json' }}"
+    dest: "/usr/local/bin/gpgme-json"
+    remote_src: true
+    owner: root
+    group: root
+    mode: "u=rwx,go=rx"
 
 - name: Install Browser Extensions
   become: true

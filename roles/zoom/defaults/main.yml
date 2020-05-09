@@ -1,0 +1,4 @@
+---
+zoom_become_user: "{{ lookup('env','USER') }}"
+zoom_become_user_home: "{{ lookup('env','HOME') }}"
+zoom_url: "https://zoom.us/client/latest/zoom_amd64.deb"

@@ -157,7 +157,17 @@
 - hosts: azure
   gather_facts: false
   roles:
-    - role: az-cli-extensions
-      az_cli_extensions_user: "{{ target_user }}"
+    - role: azure-cli
+      azure_cli_become_user: "{{ target_user }}"
+      azure_cli_become_user_home: "{{ target_user_home }}"
       tags:
         - azure
+
+- hosts: zoom
+  gather_facts: false
+  roles:
+    - role: zoom
+      zoom_become_user: "{{ target_user }}"
+      zoom_become_user_home: "{{ target_user_home }}"
+      tags:
+        - zoom

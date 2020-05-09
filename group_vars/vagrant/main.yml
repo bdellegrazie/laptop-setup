@@ -3,7 +3,7 @@ packages_apt__vagrant:
   - build-essential
   - dnsmasq-base
   - ebtables
-  - libvirt-bin
+  - libvirt-daemon-system
   - libvirt-dev
   - libxslt-dev
   - libxml2-dev

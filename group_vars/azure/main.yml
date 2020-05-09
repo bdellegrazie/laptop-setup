@@ -6,11 +6,13 @@ repositories_apt_key__azure_cli:
 
 repositories_apt__azure_cli:
   - filename: azure-cli
-    repo: 'deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ ansible_lsb["codename"] | lower }} main'
+    # No focal repo at present, use bionic instead
+    #repo: 'deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ ansible_lsb["codename"] | lower }} main'
+    repo: 'deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ bionic main'
 
 packages_apt__azure_cli:
   - 'azure-cli'
 
-az_cli_extensions:
+azure_cli_extensions:
   - 'azure-devops'
   - 'aks-preview'

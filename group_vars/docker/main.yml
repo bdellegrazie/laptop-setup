@@ -5,7 +5,9 @@ repositories_apt_key__docker:
 
 repositories_apt__docker:
   - filename: docker
-    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_facts['distribution_release'] }} stable"
+    # No focal repo at present, use eoan
+    #repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_facts['distribution_release'] }} stable"
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu eoan stable"
 
 repositories_apt_pre__docker:
   - 'apt-transport-https'

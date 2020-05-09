@@ -1,0 +1,59 @@
+---
+# az should be installed by the "repos" and "packages" roles - this is about cli extensions
+- name: Local facts
+  set_fact:
+    _azure_cli_root: "{{ azure_cli_become_user_home ~ '/.azure' }}"
+
+- name: Directories
+  become: true
+  become_user: "{{ azure_cli_become_user }}"
+  file:
+    path: "{{ _azure_cli_root }}"
+    state: "directory"
+    owner: "{{ azure_cli_become_user }}"
+    mode: "u=rwx,go=rx"
+
+- name: Configure CLI
+  become: true
+  become_user: "{{ azure_cli_become_user }}"
+  ini_file:
+    path: "{{ _azure_cli_root ~ '/config' }}"
+    section: "{{ item.section }}"
+    option: "{{ item.option }}"
+    value: "{{ item.value | default(omit) }}"
+    state: "{{ item.state | default('present') }}"
+    owner: "{{ azure_cli_become_user }}"
+    mode: "u=rw,go="
+  loop: "{{ azure_cli_config }}"
+  loop_control:
+    label: "{{ item.section ~ ':' ~ 'item.option' ~ ':' ~ (item.state|default('present')) }}"
+
+- name: retrieve available extensions
+  become: true
+  become_user: "{{ azure_cli_become_user }}"
+  command: az extension list-available --output json
+  changed_when: false
+  check_mode: false
+  register: _extension_list_all_raw
+
+- name: extension facts from JSON via CLI
+  set_fact:
+    _extension_list_all: "{{ _extension_list_all_raw.stdout | from_json }}"
+
+- name: extension facts
+  set_fact:
+    _extension_list_install: "{{ _extension_list_install |
+      default([]) |
+      union( [item['name']] if item['name'] in azure_cli_extensions and not item['installed'] else [] )
+    }}"
+  loop: "{{ _extension_list_all }}"
+  loop_control:
+    label: "{{ item['name'] }}"
+
+- name: install extensions
+  become: true
+  become_user: "{{ azure_cli_become_user }}"
+  command: "az extension add --output json --yes --name {{ item }}"
+  loop: "{{ _extension_list_install }}"
+  tags:
+    - skip_ansible_lint

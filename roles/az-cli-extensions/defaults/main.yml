@@ -1,3 +1,0 @@
----
-az_cli_extensions_become_user: "{{ lookup('env','USER') }}"
-az_cli_extensions: []

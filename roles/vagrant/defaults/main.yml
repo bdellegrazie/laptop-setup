@@ -1,8 +1,8 @@
 ---
 vagrant_become_user: "{{ lookup('env','USER') }}"
 vagrant_become_user_home: "{{ lookup('env','HOME') }}"
-vagrant_version: "2.2.6"
-vagrant_checksum: "sha1:efca0312288ad3cc13ee7783813ca7f1d780b4ed"
+vagrant_version: "2.2.9"
+vagrant_checksum: "sha1:00de8ec88b9f5bd607012973ca35d1813c8f4bc3"
 vagrant_url: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.deb"
 vagrant_cache: "{{ vagrant_become_user_home ~ '/Downloads' }}"
 vagrant_plugins:

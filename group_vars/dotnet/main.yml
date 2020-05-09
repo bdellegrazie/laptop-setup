@@ -9,5 +9,6 @@ repositories_apt__dotnet:
   - filename: microsoft-prod
     repo: 'deb [arch=amd64] https://packages.microsoft.com/{{ ansible_lsb["id"] | lower }}/{{ ansible_lsb["release"] | lower }}/prod {{ ansible_lsb["codename"] | lower }} main'
 
+# Focal doesn't have a dotnet entry yet
 packages_apt__dotnet:
-  - 'dotnet-sdk-3.1'
+  #- 'dotnet-sdk-3.1'

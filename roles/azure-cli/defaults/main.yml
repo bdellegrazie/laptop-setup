@@ -1,0 +1,10 @@
+---
+azure_cli_config:
+  - section: core
+    option: collect_telemetry
+    value: "false"
+
+azure_cli_become_user: "{{ lookup('env','USER') }}"
+azure_cli_become_user_home: "{{ lookup('env','HOME') }}"
+
+azure_cli_extensions: []

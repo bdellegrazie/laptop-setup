@@ -9,5 +9,6 @@ repositories_apt__powershell:
   - filename: microsoft-prod
     repo: 'deb [arch=amd64] https://packages.microsoft.com/{{ ansible_lsb["id"] | lower }}/{{ ansible_lsb["release"] | lower }}/prod {{ ansible_lsb["codename"] | lower }} main'
 
+# powershell-core is not available for focal yet
 packages_apt__powershell:
-  - 'powershell'
+  #- 'powershell'

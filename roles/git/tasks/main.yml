@@ -24,7 +24,7 @@
 - name: Build
   become: true
   become_user: "{{ git_become_user }}"
-  shell: make all
+  command: /usr/bin/make all
   args:
     chdir: "{{ _build_dir }}"
     creates: "{{ _build_dir ~ '/' ~ git_credential_libsecret_name }}"

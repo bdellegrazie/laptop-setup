@@ -1,0 +1,12 @@
+---
+- name: Get Package
+  get_url:
+    url: "{{ zoom_url }}"
+    dest: "{{ _zoom_target }}"
+    checksum: "{{ zoom_checksum }}"
+    mode: "u=rw,g=r,o="
+
+- name: Install
+  become: true
+  apt:
+    deb: "{{ _zoom_target }}"

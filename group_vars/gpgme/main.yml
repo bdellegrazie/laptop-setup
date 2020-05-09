@@ -4,3 +4,9 @@ packages_apt__gpgme:
   - gpg
   - libreadline-dev
   - readline-common
+  - libgpgme-dev
+  - libgpgme11
+  - libassuan-dev
+  - libassuan0
+  - libgpg-error-dev
+  - libgpg-error0
